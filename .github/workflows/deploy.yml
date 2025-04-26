@@ -34,6 +34,14 @@ jobs:
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+          
+      - name: Add special files
+        run: |
+          touch dist/.nojekyll
+          cp public/favicon.svg dist/
+          if [ -f "public/CNAME" ]; then
+            cp public/CNAME dist/
+          fi
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
