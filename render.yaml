@@ -1,37 +1,11 @@
 services:
   - type: web
     name: jennyblog
-    env: static
-    buildCommand: |
-      yarn install 
-      yarn build 
-      cp public/_redirects dist/
-      cp public/render-static.json dist/render-static.json
-      cp public/200.html dist/200.html
-      echo '/* /index.html 200' > dist/_redirects
-    staticPublishPath: ./dist
-    pullRequestPreviewsEnabled: true
+    env: node
+    buildCommand: yarn install && yarn build
+    startCommand: node server.js
     envVars:
       - key: NODE_VERSION
         value: 18
-    headers:
-      - path: /*
-        name: Cache-Control
-        value: public, max-age=0, must-revalidate
-    routes:
-      # Handle root route
-      - type: rewrite
-        source: /
-        destination: /index.html
-      # Admin routes
-      - type: rewrite
-        source: /admin
-        destination: /index.html
-      # Admin sub-routes
-      - type: rewrite
-        source: /admin/*
-        destination: /index.html
-      # Handle all other routes
-      - type: rewrite
-        source: /*
-        destination: /index.html 
+      - key: PORT
+        value: 10000 

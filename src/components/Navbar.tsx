@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Lock } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useAuth } from '../contexts/AuthContext';
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const { user } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,6 +35,9 @@ const Navbar: React.FC = () => {
   ];
 
   const isActive = (path: string) => {
+    if (path === '/admin' && location.pathname.startsWith('/admin')) {
+      return true;
+    }
     return location.pathname === path;
   };
 
@@ -48,7 +53,7 @@ const Navbar: React.FC = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-8">
+        <nav className="hidden md:flex space-x-8 items-center">
           {navLinks.map((link) => (
             <Link
               key={link.path}
@@ -62,6 +67,13 @@ const Navbar: React.FC = () => {
               {link.name}
             </Link>
           ))}
+          <Link
+            to={user ? "/admin" : "/admin/login"}
+            className="flex items-center gap-1 px-3 py-1 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-700"
+          >
+            <Lock size={16} />
+            <span>Admin</span>
+          </Link>
         </nav>
 
         {/* Mobile Navigation Toggle */}
@@ -97,6 +109,13 @@ const Navbar: React.FC = () => {
                 {link.name}
               </Link>
             ))}
+            <Link
+              to={user ? "/admin" : "/admin/login"}
+              className="flex items-center gap-2 py-2 px-4 rounded-md text-lg text-neutral-700 hover:bg-neutral-100"
+            >
+              <Lock size={18} />
+              <span>Admin</span>
+            </Link>
           </div>
         </motion.div>
       )}
