@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: jennyblog
+    env: static
+    buildCommand: yarn install && yarn build
+    staticPublishPath: ./dist
+    pullRequestPreviewsEnabled: true
+    envVars:
+      - key: NODE_VERSION
+        value: 18
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=0, must-revalidate
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html 

@@ -8,7 +8,7 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
-  base: '/jennyblog/',
+  base: '/',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
