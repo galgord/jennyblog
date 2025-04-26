@@ -108,8 +108,8 @@ const HomePage: React.FC = () => {
               viewport={{ once: true }}
             >
               <img 
-                src="https://images.pexels.com/photos/3768902/pexels-photo-3768902.jpeg" 
-                alt="Jenny Gordon" 
+                src="../assets/jenny.jpg"
+                alt="Jenny"
                 className="rounded-lg shadow-lg"
               />
             </motion.div>
