@@ -7,6 +7,7 @@ import { Database } from '../lib/database.types';
 import FeaturedPost from '../components/FeaturedPost';
 import BlogCard from '../components/BlogCard';
 import TestimonialCard from '../components/TestimonialCard';
+import jennyImage from '../assets/jenny.png';
 
 type BlogPost = Database['public']['Tables']['blog_posts']['Row'];
 type Testimonial = Database['public']['Tables']['testimonials']['Row'];
@@ -108,7 +109,7 @@ const HomePage: React.FC = () => {
               viewport={{ once: true }}
             >
               <img 
-                src="../assets/jenny.jpg"
+                src={jennyImage}
                 alt="Jenny"
                 className="rounded-lg shadow-lg"
               />
