@@ -35,6 +35,13 @@ jobs:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
           
+      - name: Debug build output
+        run: |
+          echo "Listing dist directory:"
+          ls -la dist
+          echo "Checking index.html:"
+          cat dist/index.html
+          
       - name: Add special files
         run: |
           touch dist/.nojekyll
